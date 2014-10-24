@@ -89,8 +89,8 @@ class UsersControllerTest < ActionController::TestCase
 				assert @user.reload.activated, "should verify the user"
 			end
 
-			should "send user to show page" do
-				assert_template :show, "should send to show page"
+			should "send user to login show page" do
+				assert_redirected_to login_show_path(@user), "should send to login show page"
 			end
 		end
 	end

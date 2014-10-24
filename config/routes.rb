@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   #
   # get 'logins/destroy'
 
-	get '/login/show', to: 'logins#show', as: 'login_show'
+	get '/login/show/:id', to: 'logins#show', as: 'login_show'
   #
   # get 'users/index'
   #
