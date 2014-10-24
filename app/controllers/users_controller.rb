@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 
 		if @user.save
-			session[:user_id] = @user.id
+			session[:current_user_id] = @user.id
 			render :show, success: "Thank you for registering."
 		else
 			render :new

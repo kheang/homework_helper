@@ -58,7 +58,7 @@ class UsersControllerTest < ActionController::TestCase
 			end
 
 			should "create new session" do
-				assert_equal session[:user_id], assigns["user"].id, "Should set session user_id to new user id"
+				assert_equal session[:current_user_id], assigns["user"].id, "Should set session user_id to new user id"
 			end
 
 			should "send to homepage after creating user" do
