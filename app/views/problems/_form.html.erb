@@ -1,3 +1,5 @@
+<div class="row">
+  <div class="large-10 columns">
 <%= form_for(@problem) do |f| %>
   <% if @problem.errors.any? %>
     <div id="error_explanation">
@@ -10,20 +12,17 @@
       </ul>
     </div>
   <% end %>
+<%= f.text_area :issue, placeholder: "What's your Problem?" %>
+<%= f. text_area :try, placeholder: "What were your Solutions?" %>
+<%= f.hidden_field :user_id, :value => @current_user %>
 
-  <div class="field">
-    <%= f.label :issue %><br>
-    <%= f.text_area :issue %>
-  </div>
-  <div class="field">
-    <%= f.label :try %><br>
-    <%= f.text_area :try %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+
+
+<%= f.button :submit, class: "btn btn-large btn-success" %>
+
 <% end %>
+</div>
+
+
+  <
