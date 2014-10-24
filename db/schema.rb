@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141024175103) do
+ActiveRecord::Schema.define(version: 20141024192238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "notes", force: true do |t|
     t.text     "comment"
-    t.boolean  "chosen",     default: false
+    t.boolean  "chosen"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20141024175103) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "activation_key"
-    t.boolean  "activated",       default: false
+    t.boolean  "activated"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
