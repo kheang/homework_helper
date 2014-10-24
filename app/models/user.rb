@@ -21,6 +21,6 @@ class User < ActiveRecord::Base
 	end
 
 	def send_email
-		# SecurityMailer.user_verification(id).deliver
+		UserMailer.account_activation(id).deliver
 	end
 end
