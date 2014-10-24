@@ -1,0 +1,29 @@
+<h1>Listing problems</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Issue</th>
+      <th>Try</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @problems.each do |problem| %>
+      <tr>
+        <td><%= problem.issue %></td>
+        <td><%= problem.try %></td>
+        <td><%= problem.user %></td>
+        <td><%= link_to 'Show', problem %></td>
+        <td><%= link_to 'Edit', edit_problem_path(problem) %></td>
+        <td><%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Problem', new_problem_path %>
