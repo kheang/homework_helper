@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # get 'logins/create'
   #
   # get 'logins/destroy'
+
+	get '/login/show', to: 'logins#show', as: 'login_show'
   #
   # get 'users/index'
   #
@@ -25,11 +27,11 @@ Rails.application.routes.draw do
 	  resources :notes, :shallow => true
   end
 
-  resources :users, :only => [:new, :create, :show]
-  resource :login, :only => [:new, :create, :destroy]
+  resources :users, :only => [:new, :create]
+  resource :login, :only => [:new, :create, :destroy, :show]
 
-	get 'users/verify/:activation_key' => 'users#verify', as: :verify_user
-	patch 'users/verify' => 'users#update'
+	get 'users/activate/:activation_key' => 'users#activate', as: :activate_user
+	patch 'users/activate' => 'users#update'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

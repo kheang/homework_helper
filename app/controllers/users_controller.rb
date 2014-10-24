@@ -7,20 +7,19 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 
 		if @user.save
-			session[:current_user_id] = @user.id
-			render :show, success: "Thank you for registering."
+			redirect_to login_show_path, success: "Thank you for registering."
 		else
 			render :new
 		end
 
 	end
 
-	def verify
+	def activate
 		if valid_key?
 			@user.update(activated: true)
-			render :show, success: "User account successfully verified."
+			render :show, success: "User account successfully activated."
 		else
-			render :show, error: "User verification failed. Please double check email or request new activation key."
+			render :show, error: "User activation failed. Please double check email or request new activation key."
 		end
 	end
 

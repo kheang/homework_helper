@@ -57,12 +57,8 @@ class UsersControllerTest < ActionController::TestCase
 				assert_equal @user[:name], assigns["user"].name
 			end
 
-			should "create new session" do
-				assert_equal session[:current_user_id], assigns["user"].id, "Should set session user_id to new user id"
-			end
-
-			should "send to homepage after creating user" do
-				assert_template :show, "Should send to show"
+			should "send to login show prompt after creating user" do
+				assert_redirected_to login_show_path, "Should send to login show"
 			end
 		end
 	end
@@ -71,7 +67,7 @@ class UsersControllerTest < ActionController::TestCase
 		context "when I verify with an invalid key" do
 			setup do
 				@user = users(:one)
-				patch :verify, { id: @user.id, activation_key: SecureRandom.uuid }
+				patch :activate, { id: @user.id, activation_key: SecureRandom.uuid }
 			end
 
 			should "not verify the user" do
@@ -86,7 +82,7 @@ class UsersControllerTest < ActionController::TestCase
 		context "when I verify with a valid key" do
 			setup do
 				@user = users(:one)
-				patch :verify, { id: @user.id, activation_key: @user.activation_key }
+				patch :activate, { id: @user.id, activation_key: @user.activation_key }
 			end
 
 			should "verify the user" do
