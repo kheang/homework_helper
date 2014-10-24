@@ -58,7 +58,7 @@ class UsersControllerTest < ActionController::TestCase
 			end
 
 			should "send to login show prompt after creating user" do
-				assert_redirected_to login_show_path, "Should send to login show"
+				assert_redirected_to login_show_path(assigns["user"].id), "Should send to login show"
 			end
 		end
 	end
