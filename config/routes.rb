@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   resources :users, :only => [:new, :create, :show]
   resource :login, :only => [:new, :create, :destroy]
 
-	get 'users/verify/:key' => 'users#verify', as: :verify_user
+	get 'users/verify/:activation_key' => 'users#verify', as: :verify_user
 	patch 'users/verify' => 'users#update'
 
   # The priority is based upon order of creation: first created -> highest priority.

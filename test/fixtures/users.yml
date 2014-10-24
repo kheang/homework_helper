@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  email: MyString
-  password_digest: MyString
-  activation_key: MyString
+  name: User One
+  email: one@example.com
+  password_digest: <%= BCrypt::Password.create("password", cost: 10) %>
+  activation_key: <%= SecureRandom.uuid %>
   activated: false
 
 two:
-  name: MyString
-  email: MyString
-  password_digest: MyString
-  activation_key: MyString
+  name: User Two
+  email: two@example.com
+  password_digest: <%= BCrypt::Password.create("password", cost: 10) %>
+  activation_key: <%= SecureRandom.uuid %>
   activated: false

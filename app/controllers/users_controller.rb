@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
 		if @user.save
 			session[:user_id] = @user.id
-			render :show, success: "Thanks for registering. To begin using your account, check your email and verify your account."
+			render :show, success: "Thank you for registering."
 		else
 			render :new
 		end
@@ -17,17 +17,17 @@ class UsersController < ApplicationController
 
 	def verify
 		if valid_key?
-			@user.update(verified: true)
-			render :show, success: "User account successfully verified"
+			@user.update(activated: true)
+			render :show, success: "User account successfully verified."
 		else
-			render :show, error: "User verification failed. Please double check email or request new verification key."
+			render :show, error: "User verification failed. Please double check email or request new activation key."
 		end
 	end
 
 	private
 
 	def valid_key?
-		@user = User.find_by(key: params[:key])
+		@user = User.find_by(activation_key: params[:activation_key])
 	end
 
 	def user_params

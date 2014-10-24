@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20141024193045) do
 
   create_table "notes", force: true do |t|
     t.text     "comment"
-    t.boolean  "chosen"
+    t.boolean  "chosen",     default: false
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20141024193045) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "activation_key"
-    t.boolean  "activated"
+    t.boolean  "activated",       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
