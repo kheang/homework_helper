@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :logged_in?
 
-  add_flash_types :success
+  add_flash_types :success, :info
 
   private
 
@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate
 	  unless logged_in?
-		  redirect_to new_login_path, notice: "Please sign in."
+		  redirect_to new_login_path, warning: "Please sign in."
 	  end
   end
 end
