@@ -17,6 +17,8 @@ class NotesController < ApplicationController
     @note.problem = @problem
 
     if @note.save
+      redirect_to @problem, success: "Note created."
+    else
       redirect_to @problem
     end
   end
