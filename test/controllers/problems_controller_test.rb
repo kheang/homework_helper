@@ -79,6 +79,5 @@ class ProblemsControllerTest < ActionController::TestCase
         assert_redirected_to problem_path(assigns[:problem]), "Should redirect to show problem"
       end
     end
-
   end
 end
