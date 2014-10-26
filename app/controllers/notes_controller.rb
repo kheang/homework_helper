@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   before_action :authenticate
-  before_action :set_note, only: [:destroy, :update]
+  before_action :set_note, only: [:destroy, :update, :choose]
 
   def index
     @notes = Note.all
@@ -26,15 +26,22 @@ class NotesController < ApplicationController
   end
 
   def update
-    @note.toggle(:chosen)
-    @note.save
-    redirect_to @note.problem
+  end
+
+  def choose
+    @note.update(chosen: true)
+    if @note.save
+      redirect_to @note.problem
+      @note.problem.update()
+    end
   end
 
   private
-    def note_params
-      params.require(:note).permit(:user, :comment, :chosen, :name)
-    end
+
+  def note_params
+    params.require(:note).permit(:user, :comment, :chosen, :name)
+  end
+
   def set_note
 		@note = Note.find(params["id"])
   end

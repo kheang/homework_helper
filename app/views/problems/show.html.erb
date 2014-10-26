@@ -24,7 +24,7 @@
 		<% @problem.notes.each do |note| %>
 			<div class="panel">
 			  <p>
-			    <%= note.comment %>
+			    <%= note.comment %> <%= link_to 'Mark as resolution <i class="fa fa-check-square"></i>'.html_safe, choose_note_path(note) %>
 		    </p>
 			  <p>
 			    <strong>Posted by</strong> <%= note.user.name %>
