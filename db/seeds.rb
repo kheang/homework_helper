@@ -16,7 +16,7 @@ Note.delete_all
 
   fake_name = Faker::Name.name
   user = User.create!(name: fake_name,
-                      email: Faker::Internet.free_email(fake_name),
+                      email: fake_name + "@fakeemail.com",
                       password_digest: BCrypt::Password.create("password", cost: 10))
 
   rand(1..2).times do
@@ -28,7 +28,7 @@ end
 
 fake_name = "Kheang"
 user = User.create!(name: fake_name,
-                    email: "email@email.com",
+                    email: "ineedhelp8191@gmail.com",
                     password_digest: BCrypt::Password.create("password", cost: 10))
 
 rand(4).times do
