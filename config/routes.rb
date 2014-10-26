@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 	get 'problems/index'
 
   resources :problems do
+    get :close, on: :member
 	  resources :notes, :shallow => true do
       get :choose, on: :member
     end

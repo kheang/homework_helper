@@ -29,10 +29,12 @@ class NotesController < ApplicationController
   end
 
   def choose
-    @note.update(chosen: true)
-    if @note.save
-      redirect_to @note.problem
-      @note.problem.update()
+    @problem = @note.problem
+
+    if @note.update(chosen: true) && @problem.update(resolved: true)
+      redirect_to problem_path(@problem), success: "Problem has been closed and removed from open problems list."
+    else
+      redirect_to problem_path(@problem)
     end
   end
 
