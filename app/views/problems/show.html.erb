@@ -1,19 +1,50 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
 
 <p>
-  <strong>Issue:</strong>
+  <strong>The Issue I'm Having:</strong>
   <%= @problem.issue %>
 </p>
 
-<p>
-  <strong>Try:</strong>
+<p><strong>What Did I Try:</strong>
   <%= @problem.try %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @problem.user %>
+  <strong>Asked by:</strong>
+  <%=@problem.user %>
 </p>
+</div>
+<div class="row">
+
+<h2>Notes</h2>
+<% @problem.notes.each do |note| %>
+  <p>
+   <strong>Note:</strong>
+   <%= note.comment %>
+   </p>
+ <p><strong>This Help Provided by</strong> <%= note.user %></p>
+<% end %>
+
+</div>
+
+
+<div class="row">
+<h4>Add a Note:</h4>
+
+<%= form_for([@problem, @problem.notes.build]) do |f| %>
+  <p>
+    <!-- <%= f.label :user %> -->
+    <!-- <%= f.hidden_field :user, value: @current_user  %> -->
+  </p>
+  <p>
+
+    <%= f.text_area :comment %>
+  </p>
+  <div>
+<%= f.button :submit, class: "btn btn-large btn-success" %>  </div>
+<% end %>
+</div>
 
 <%= link_to 'Edit', edit_problem_path(@problem) %> |
 <%= link_to 'Back', problems_path %>

@@ -1,49 +1,35 @@
 require 'test_helper'
 
 class ProblemsControllerTest < ActionController::TestCase
-  setup do
-    @problem = problems(:one)
-  end
+   context "GET problems#index" do
+    setup { get :index }
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:problems)
-  end
+    should render_template("index")
+    should respond_with(:ok)
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create problem" do
-    assert_difference('Problem.count') do
-      post :create, problem: { issue: @problem.issue, try: @problem.try, user_id: @problem.user_id }
+		should "show problems" do
+      assert assigns[:problems], "should load problems"
+		end
     end
+  context "GET problems#show" do
+	  setup { get :show, id: problems(:one) }
 
-    assert_redirected_to problem_path(assigns(:problem))
+	  should render_template("show")
+	  should respond_with(:ok)
+
+	  should "show problem" do
+		  assert assigns[:problem], "should show specific problem"
+	  end
+
+	  should "load notes too" do
+		  assert assigns[:notes], "should show problems with notes"
+	  end
   end
 
-  test "should show problem" do
-    get :show, id: @problem
-    assert_response :success
-  end
+  context "GET problems#new" do
 
-  test "should get edit" do
-    get :edit, id: @problem
-    assert_response :success
-  end
-
-  test "should update problem" do
-    patch :update, id: @problem, problem: { issue: @problem.issue, try: @problem.try, user_id: @problem.user_id }
-    assert_redirected_to problem_path(assigns(:problem))
-  end
-
-  test "should destroy problem" do
-    assert_difference('Problem.count', -1) do
-      delete :destroy, id: @problem
+      should "open a new problem" do
+        assert assigns[:problem], "Should show new problem"
+      end
     end
-
-    assert_redirected_to problems_path
-  end
 end
