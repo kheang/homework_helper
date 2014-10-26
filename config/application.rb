@@ -6,8 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-config.action_mailer.delivery_method   = :postmark
-config.action_mailer.postmark_settings = { :api_key => ENV['POSTMARK_API_KEY'] }
+
 
 module Lab6
   class Application < Rails::Application
@@ -22,5 +21,7 @@ module Lab6
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    config.action_mailer.delivery_method   = :postmark
+    config.action_mailer.postmark_settings = { :api_key => ENV['POSTMARK_API_KEY'] }
   end
 end
