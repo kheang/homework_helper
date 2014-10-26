@@ -8,7 +8,6 @@ class UserMailer < ActionMailer::Base
   def new_problem(problem_id)
     @problem = Problem.find(problem_id)
     create_mail(@problem.user_id, "Your problem was added to I Need Help!")
-
   end
 
   def new_note(note_id)
