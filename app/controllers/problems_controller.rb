@@ -2,9 +2,8 @@ class ProblemsController < ApplicationController
   before_action :authenticate, only: [:new, :create, :destroy]
   before_action :set_problem, only: [:show, :edit, :update, :destroy]
 
-
   def index
-    @problems = Problem.all
+    @problems = Problem.all.reverse_order
   end
 
 
@@ -22,6 +21,7 @@ class ProblemsController < ApplicationController
 
   def create
     @problem = Problem.new(problem_params)
+    @problem.user = current_user
 
       if @problem.save
       redirect_to root_path, notice: 'Problem was successfully created.'
