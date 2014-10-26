@@ -16,7 +16,7 @@ Note.delete_all
 
   fake_name = Faker::Name.name
   user = User.create!(name: fake_name,
-                      email: fake_name + "@fakeemail.com",
+                      email: Faker::Internet.free_email(fake_name),
                       password_digest: BCrypt::Password.create("password", cost: 10))
 
   rand(1..2).times do
@@ -28,10 +28,10 @@ end
 
 fake_name = "Kheang"
 user = User.create!(name: fake_name,
-                    email: "ineedhelp8191@gmail.com",
+                    email: "email@email.com",
                     password_digest: BCrypt::Password.create("password", cost: 10))
 
-rand(4).times do
+rand(2).times do
   problem = Problem.create!(user: user,
                             issue: Faker::Lorem.sentence(3),
                             try:  Faker::Lorem.sentence(50))
