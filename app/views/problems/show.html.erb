@@ -1,50 +1,59 @@
-<p id="notice"><%= notice %></p>
 <div class="row">
+  <div class="small-10 small-offset-1 columns">
 
-<p>
-  <strong>The Issue I'm Having:</strong>
-  <%= @problem.issue %>
-</p>
+	  <p id="notice"><%= notice %></p>
+		<div class="row">
 
-<p><strong>What Did I Try:</strong>
-  <%= @problem.try %>
-</p>
+		<p>
+		  <strong>The Issue I'm Having:</strong>
+		  <%= @problem.issue %>
+		</p>
 
-<p>
-  <strong>Asked by:</strong>
-  <%=@problem.user_id %>
-</p>
+		<p><strong>What I Tried:</strong>
+		  <%= @problem.try %>
+		</p>
+
+		<p>
+		  <strong>Asked by </strong>
+		  <%=@problem.user.name %>
+		</p>
+		</div>
+		<div class="row">
+
+		<h3>Notes</h3>
+		<% @problem.notes.each do |note| %>
+			<div class="panel">
+			  <p>
+			    <%= note.comment %>
+		    </p>
+			  <p>
+			    <strong>Posted by</strong> <%= note.user.name %>
+			  </p>
+			</div>
+		<% end %>
+
+		</div>
+
+		<div class="row">
+
+			<% if logged_in? %>
+
+			  <fieldset>
+			    <legend>Add a Note:</legend>
+
+					<%= form_for([@problem, @problem.notes.build]) do |f| %>
+					  <%= f.text_area :comment %>
+						<%= f.button :submit, class: "btn btn-large btn-success" %>
+					<% end %>
+
+			  </fieldset>
+
+			<% else %>
+
+				To add a note, please <%= link_to "login", new_login_path %>
+
+			<% end %>
+		</div>
+
+	</div>
 </div>
-<div class="row">
-
-<h2>Notes</h2>
-<% @problem.notes.each do |note| %>
-  <p>
-   <strong>Note:</strong>
-   <%= note.comment %>
-   </p>
- <p><strong>This Help Provided by</strong> <%= note.user %></p>
-<% end %>
-
-</div>
-
-
-<div class="row">
-<h4>Add a Note:</h4>
-
-<%= form_for([@problem, @problem.notes.build]) do |f| %>
-  <p>
-    <!-- <%= f.label :user %> -->
-    <%= f.hidden_field :user_id, value: @current_user  %>
-  </p>
-  <p>
-
-    <%= f.text_area :comment %>
-  </p>
-  <div>
-<%= f.button :submit, class: "btn btn-large btn-success" %>  </div>
-<% end %>
-</div>
-
-<%= link_to 'Edit', edit_problem_path(@problem) %> |
-<%= link_to 'Back', problems_path %>

@@ -1,34 +1,31 @@
 
-<!-- <div>
-<ul class="stack button-group">
-  <li><a href="problems/new" class="button">New Problem</a></li>
-  <li><a href="problems/new" class="button">New Problem</a></li>
-</ul>
-</div> -->
-
-<br>
 <div class="row">
 
-<h1>Listing Problems</h1>
+  <div class="small-10 small-offset-1 columns">
 
-<div class="large-8 columns">
-<table>
-<tbody>
-  <h3>I Need Help!</h3>
-  <% @problems.order(created_at: :asc).each do |problem| %>
-    <tr>
-      <td>
-        <p><%= link_to problem.issue, problem_path(problem) %></p>
-			<p>Asked by <%= problem.user_id %></p>
-        <p> <%= problem.note_count %> :Notes</p>
-      <!-- <p><%= problem.issue %></p> -->
-      <!-- <p><%= problem.try %></p> -->
-      <!-- <p><%= link_to 'Make a Note', problem %></p> -->
-    </td>
-  </tr>
-  <% end %>
-</tbody>
-</table>
+    <h3>Unresolved Problems</h3>
+
+	<% if !logged_in? %>
+		<p>To add your own problem, please <%= link_to 'login', new_login_path %>.</p>
+	<% end %>
+
+	</div>
 </div>
+
+<% @problems.order(created_at: :asc).each do |problem| %>
+
+<div class="row">
+
+    <div class="small-10 small-offset-1 columns">
+      <div class="panel">
+        <p><%= link_to truncate(problem.issue, length: 140, omission: "...(continued)"), problem_path(problem) %></p>
+        <p>Asked by <%= problem.user.name %> on <%= problem.created_at.strftime("%A, %B %d, %Y at %l:%M%P") %> | <%= pluralize(problem.note_count, 'note') %> posted</p>
+			</div>
+		</div>
+
 </div>
+
+<% end %>
+
+
 </div>

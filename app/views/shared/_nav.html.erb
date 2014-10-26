@@ -17,10 +17,12 @@
         <li><%= link_to "Login", new_login_path %></li>
       <% end %>
 
-      <li class="divider"></li>
-      <li class="has-form">
-        <%= link_to "New Problem", new_problem_path, :class => "button" %>
-      </li>
+      <% if logged_in? %>
+        <li class="divider"></li>
+	      <li class="has-form">
+	        <%= link_to "New Problem", new_problem_path, :class => "button" %>
+	      </li>
+		  <% end %>
     </ul>
 
     <!-- Left Nav Section -->

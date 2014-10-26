@@ -1,5 +1,4 @@
-<div class="row">
-  <div class="large-10 columns">
+
 <%= form_for(@problem) do |f| %>
   <% if @problem.errors.any? %>
     <div id="error_explanation">
@@ -14,7 +13,6 @@
   <% end %>
 <%= f.text_area :issue, placeholder: "What's your Problem?" %>
 <%= f. text_area :try, placeholder: "What were your Solutions?" %>
-<%= f.hidden_field :user_id, :value => @current_user %>
 
 
 
@@ -22,7 +20,3 @@
 <%= f.button :submit, class: "btn btn-large btn-success" %>
 
 <% end %>
-</div>
-
-
-  <
