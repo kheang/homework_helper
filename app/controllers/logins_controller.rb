@@ -8,13 +8,15 @@ class LoginsController < ApplicationController
 		if @user && @user.authenticate(params[:password])
 			if @user.activated
 				session[:current_user_id] = @user.id
-				redirect_to root_path, success: "You are successfully logged in?"
+				redirect_to root_path, success: "You are successfully logged in."
 			else
-				render :show
+        flash.now[:info] = "You have not been logged in."
+        render :show
 			end
 		else
-			render :new
-		end
+			flash.now[:alert] = "Your email and password were invalid."
+      render :new
+    end
 	end
 
 	def destroy
