@@ -13,9 +13,11 @@ class NotesController < ApplicationController
 
   def create
     @problem = Problem.find(params[:problem_id])
-    @note = @problem.notes.build(note_params, user: current_user)
+    @note = current_user.notes.build(note_params)
+    @note.problem = @problem
+
     if @note.save
-      redirect_to problem_path(@problem)
+      redirect_to @problem
     end
   end
 
@@ -32,9 +34,9 @@ class NotesController < ApplicationController
     @problem = @note.problem
 
     if @note.update(chosen: true) && @problem.update(resolved: true)
-      redirect_to problem_path(@problem), success: "Problem has been closed and removed from open problems list."
+      redirect_to @problem, success: "Problem has been closed and removed from open problems list."
     else
-      redirect_to problem_path(@problem)
+      redirect_to @problem
     end
   end
 
