@@ -7,5 +7,4 @@ class ProblemTest < ActiveSupport::TestCase
 
   should belong_to(:user)
   should have_many(:notes)
-
 end

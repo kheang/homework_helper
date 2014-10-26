@@ -4,6 +4,7 @@ class Problem < ActiveRecord::Base
 
   validates :issue, presence: true
   validates :try, presence: true
+  validates :user, presence: true
 
   after_create :send_email
 

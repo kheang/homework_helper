@@ -3,9 +3,11 @@
 one:
   comment: MyText
   chosen: false
-  user_id: 
+  user: two
+  problem: one
 
 two:
   comment: MyText
   chosen: false
-  user_id: 
+  user: one
+  problem: two

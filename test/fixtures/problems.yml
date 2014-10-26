@@ -3,9 +3,11 @@
 one:
   issue: MyText
   try: MyText
-  user_id: 
+  user: one
+  resolved: false
 
 two:
   issue: MyText
   try: MyText
-  user_id: 
+  user: two
+  resolved: false

@@ -13,10 +13,10 @@ class NotesController < ApplicationController
 
   def create
     @problem = Problem.find(params[:problem_id])
-    @note = @problem.notes.build(note_params)
-    @note.user = current_user
-    @note.save
-    redirect_to problem_path(@problem)
+    @note = @problem.notes.build(note_params, user: current_user)
+    if @note.save
+      redirect_to problem_path(@problem)
+    end
   end
 
   def destroy

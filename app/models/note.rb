@@ -6,6 +6,7 @@ class Note < ActiveRecord::Base
 
   validates :comment, presence: true
   validates :problem, presence: true
+  validates :user, presence: true
 
   validate :check_one_chosen_note_per_problem
 
