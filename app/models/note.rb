@@ -2,18 +2,12 @@ class Note < ActiveRecord::Base
   belongs_to :user
 	belongs_to :problem
 
+  after_create :send_email
+
   validates :comment, presence: true
-  # validates :user, presence: true
   validates :problem, presence: true
 
   validate :check_one_chosen_note_per_problem
-
-  def name
-    @current_user
-  end
-
-
-
 
   def check_one_chosen_note_per_problem
     return unless problem.present?
@@ -23,4 +17,9 @@ class Note < ActiveRecord::Base
     end
   end
 
+  def send_email
+    if self.user != self.problem.user
+      UserMailer.new_note(self.id).deliver
+    end
+  end
 end
