@@ -1,5 +1,13 @@
-<%= link_to 'New Problem?', new_problem_path %>
+
+<!-- <div>
+<ul class="stack button-group">
+  <li><a href="problems/new" class="button">New Problem</a></li>
+  <li><a href="problems/new" class="button">New Problem</a></li>
+</ul>
+</div> -->
+
 <br>
+<div class="row">
 
 <h1>Listing Problems</h1>
 
@@ -10,13 +18,17 @@
   <% @problems.order(created_at: :asc).each do |problem| %>
     <tr>
       <td>
-      <p><%= problem.issue %></p>
-      <p><%= problem.try %></p>
-      <p><%= link_to 'Make a Note', problem %></p>
+        <p><%= link_to problem.issue, problem_path(problem) %></p>
+			<p>Asked by <%= problem.user_id %></p>
+        <p> <%= problem.note_count %> :Notes</p>
+      <!-- <p><%= problem.issue %></p> -->
+      <!-- <p><%= problem.try %></p> -->
+      <!-- <p><%= link_to 'Make a Note', problem %></p> -->
     </td>
   </tr>
   <% end %>
 </tbody>
 </table>
+</div>
 </div>
 </div>
