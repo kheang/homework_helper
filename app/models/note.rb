@@ -3,10 +3,14 @@ class Note < ActiveRecord::Base
 	belongs_to :problem
 
   validates :comment, presence: true
-  validates :user, presence: true
+  # validates :user, presence: true
   validates :problem, presence: true
 
-  validate :check_one_chosen_note_per_question
+  validate :check_one_chosen_note_per_problem
+
+  def name
+    @current_user
+  end
 
 
 

@@ -12,7 +12,7 @@
 
 <p>
   <strong>Asked by:</strong>
-  <%=@problem.user %>
+  <%=@problem.user_id %>
 </p>
 </div>
 <div class="row">
@@ -35,7 +35,7 @@
 <%= form_for([@problem, @problem.notes.build]) do |f| %>
   <p>
     <!-- <%= f.label :user %> -->
-    <!-- <%= f.hidden_field :user, value: @current_user  %> -->
+    <%= f.hidden_field :user_id, value: @current_user  %>
   </p>
   <p>
 

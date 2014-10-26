@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  # before_action :authenticate
+  before_action :authenticate
   before_action :set_note, only: [:destroy, :update]
 
   def index
@@ -30,7 +30,7 @@ class NotesController < ApplicationController
 
   private
     def note_params
-      params.require(:note).permit(:user, :comment, :chosen)
+      params.require(:note).permit(:user, :comment, :chosen, :name)
     end
   def set_note
 		@note = Note.find(params["id"])
