@@ -39,6 +39,8 @@ gem 'unicorn'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'postmark-rails'
+
 gem 'foundation-rails'
 gem 'simple_form'
 gem 'faker'

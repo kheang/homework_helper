@@ -6,6 +6,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+config.action_mailer.delivery_method   = :postmark
+config.action_mailer.postmark_settings = { :api_key => ENV['POSTMARK_API_KEY'] }
+
 module Lab6
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
