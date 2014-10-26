@@ -12,14 +12,14 @@ User.delete_all
 Problem.delete_all
 Note.delete_all
 
-5.times do
+2.times do
 
   fake_name = Faker::Name.name
   user = User.create!(name: fake_name,
                       email: Faker::Internet.free_email(fake_name),
                       password_digest: BCrypt::Password.create("password", cost: 10))
 
-  rand(2..3).times do
+  rand(1..2).times do
     problem = Problem.create!(user: user,
                      issue: Faker::Lorem.sentence(3),
                      try:  Faker::Lorem.sentence(50))
@@ -31,14 +31,14 @@ user = User.create!(name: fake_name,
                     email: "email@email.com",
                     password_digest: BCrypt::Password.create("password", cost: 10))
 
-rand(2..3).times do
+rand(4).times do
   problem = Problem.create!(user: user,
                             issue: Faker::Lorem.sentence(3),
                             try:  Faker::Lorem.sentence(50))
 end
 
 Problem.all.each do |problem|
-  rand(1..3).times do
+  rand(1..2).times do
     problem.notes.create!(user: User.all.sample,
                           comment: Faker::Lorem.sentence(10),
                           chosen: false)
