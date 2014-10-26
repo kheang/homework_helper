@@ -7,7 +7,7 @@ class ActiveSupport::TestCase
   fixtures :all
 
   def logged_in_session
-	  users(:one).update(activated: true)
-	  { current_user_id: users(:one).id }
+    users(:one).update(activated: true)
+    { current_user_id: users(:one).id }
   end
 end

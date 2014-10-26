@@ -1,5 +1,5 @@
 class ProblemsController < ApplicationController
-  before_action :authenticate, only: [:new, :create, :destroy]
+  before_action :authenticate, only: [:new, :create, :destroy, :close, :update]
   before_action :set_problem, only: [:show, :update, :destroy, :close]
 
   def index
@@ -14,10 +14,10 @@ class ProblemsController < ApplicationController
   end
 
   def create
-    @problem = Problem.new(problem_params, user: current_user)
+    @problem = current_user.problems.build(problem_params)
 
     if @problem.save
-      redirect_to root_path, notice: 'Problem was successfully created.'
+      redirect_to @problem, notice: 'Problem was successfully created.'
     else
       render :new
     end
@@ -50,7 +50,7 @@ class ProblemsController < ApplicationController
   end
 
   def problem_params
-    params.require(:problem).permit(:issue, :try, :user_id)
+    params.require(:problem).permit(:issue, :try)
   end
 
 end
