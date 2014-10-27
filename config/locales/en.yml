@@ -21,3 +21,6 @@
 
 en:
   hello: "Hello world"
+  time:
+    formats:
+      asked: "%A, %B %d, %Y at %l:%M%P"
