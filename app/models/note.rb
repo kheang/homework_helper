@@ -13,7 +13,7 @@ class Note < ActiveRecord::Base
   def check_one_chosen_note_per_problem
     return unless problem.present?
 
-    if problem.has_chosen_note? && self.chosen?
+    if problem.resolved && self.chosen?
       errors.add(:chosen, "cannot be chosen because there is already a chosen note for that problem")
     end
   end

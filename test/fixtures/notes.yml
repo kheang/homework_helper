@@ -6,6 +6,12 @@ one:
   user: two
   problem: one
 
+one_problem_resolved:
+  comment: MyText
+  chosen: false
+  user: two
+  problem: one_resolved
+
 two:
   comment: MyText
   chosen: false

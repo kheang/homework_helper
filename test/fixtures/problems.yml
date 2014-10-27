@@ -6,6 +6,12 @@ one:
   user: one
   resolved: false
 
+one_resolved:
+  issue: MyText
+  try: MyText
+  user: one
+  resolved: true
+
 two:
   issue: MyText
   try: MyText

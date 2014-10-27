@@ -8,10 +8,6 @@ class Problem < ActiveRecord::Base
 
   after_create :send_email
 
-  def has_chosen_note?
-    notes.where(chosen: true).count > 0
-  end
-
   def note_count
     notes.count
   end
