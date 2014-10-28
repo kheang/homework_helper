@@ -44,6 +44,8 @@ gem 'simple_form'
 gem 'faker'
 gem 'rails_12factor', group: :production
 
+gem 'simplecov', :require => false, :group => :test
+
 group :development, :test do
 	gem "better_errors"
 	gem "binding_of_caller"
