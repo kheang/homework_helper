@@ -4,9 +4,12 @@ class ProblemsController < ApplicationController
 
   def index
     @problems = Problem.where(resolved: false).order('created_at DESC')
+		@problem = Problem.new
   end
 
   def show
+		@notes = @problem.notes
+		@note = Note.new
   end
 
   def new
@@ -38,9 +41,21 @@ class ProblemsController < ApplicationController
   end
 
   def close
-    if @problem.update(resolved: true)
-      redirect_to @problem, success: "Problem has been closed and removed from the open problems list."
-    end
+    respond_to do |format|
+
+			format.html do
+		    if @problem.update(resolved: true)
+	        redirect_to @problem, success: "Problem has been closed and removed from the open problems list."
+		    end
+			end
+
+	    format.js do
+		    if @problem.update(resolved: true)
+					@problems = Problem.where(resolved: false).order('created_at DESC')
+			    render :resolve, status: :resolved
+		    end
+	    end
+	  end
   end
 
   private

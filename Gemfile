@@ -39,12 +39,16 @@ gem 'unicorn'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'foundation-rails'
+
 gem 'simple_form'
 gem 'faker'
 gem 'rails_12factor', group: :production
 
 gem 'simplecov', :require => false, :group => :test
+
+# Assets
+gem 'foundation-rails'
+gem 'jquery-ui-rails'
 
 group :development, :test do
 	gem "better_errors"

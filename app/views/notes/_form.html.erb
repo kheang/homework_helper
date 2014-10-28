@@ -1,0 +1,14 @@
+<div class="row">
+
+  <% if logged_in? %>
+      <fieldset>
+        <legend>Add a Note:</legend>
+        <%= simple_form_for [@problem, @note], remote: true do |form| %>
+            <%= form.input :comment, :label => false %>
+            <%= form.button :submit, 'Add Note', class: "btn btn-large btn-success" %>
+        <% end %>
+      </fieldset>
+  <% else %>
+      To add a note, please <%= link_to "login", new_login_path %>
+  <% end %>
+</div>

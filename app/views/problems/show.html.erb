@@ -30,43 +30,12 @@
 
 		</div>
 
-		<div class="row">
-			<h3>Notes</h3>
-			<% @problem.notes.each do |note| %>
-				<div class="panel">
-				  <p>
-				    <%= note.comment %>
-			    </p>
-				  <p>
-				    Posted by <%= note.user.name %>
-				    <% if @problem.resolved == false %>
-						  <% if current_user == @problem.user && current_user != note.user %>
-				        | <%= link_to 'Mark as resolution <i class="fa fa-check-square"></i>'.html_safe, choose_note_path(note) %>
-						  <% end %>
-					  <% else %>
-						  <% if note.chosen %>
-							  | <strong>Resolved Problem</strong>
-							<% end %>
-					  <% end %>
-				  </p>
-				</div>
-			<% end %>
-		</div>
+<div id="notes">
+  <%= render @notes %>
+</div>
 
-		<div class="row">
+<div id="note_form">
+  <%= render 'notes/form' %>
+</div>
 
-			<% if logged_in? %>
-			  <fieldset>
-			    <legend>Add a Note:</legend>
-					<%= form_for([@problem, @problem.notes.build]) do |f| %>
-					  <%= f.text_area :comment %>
-						<%= f.button 'Add Note', class: "btn btn-large btn-success" %>
-					<% end %>
-			  </fieldset>
-			<% else %>
-				To add a note, please <%= link_to "login", new_login_path %>
-			<% end %>
-		</div>
-
-	</div>
 </div>
