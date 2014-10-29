@@ -1,19 +1,9 @@
+<%= simple_form_for [@problem], remote: true do |form| %>
+    My problem:
+    <%= form.input :issue, :label => false %>
+    What I tried:
+    <%= form.input :try, :label => false %>
 
-<%= form_for(@problem) do |f| %>
-  <% if @problem.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@problem.errors.count, "error") %> prohibited this problem from being saved:</h2>
-
-      <ul>
-      <% @problem.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-<%= f.text_area :issue, placeholder: "What's your Problem?" %>
-<%= f. text_area :try, placeholder: "What were your Solutions?" %>
-
-<%= f.button 'Add Problem', class: "btn btn-large btn-success" %>
+    <%= form.button :submit, 'Add Problem', class: "btn btn-large btn-success" %>
 
 <% end %>

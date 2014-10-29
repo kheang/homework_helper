@@ -19,12 +19,33 @@ class ProblemsController < ApplicationController
   def create
     @problem = current_user.problems.build(problem_params)
 
-    if @problem.save
-      redirect_to @problem, notice: 'Problem was successfully created.'
-    else
-      render :new
+    respond_to do |format|
+	    format.js do
+		    if @problem.save
+			    if request.referrer == problems_url
+				    render :create, status: :created
+			    else
+				    redirect_to @problem, notice: 'Problem was successfully created.'
+			    end
+		    else
+			    render :new
+		    end
+	    end
+
+	    format.html do
+		    if @problem.save
+			    if request.referrer == problems_url
+				    redirect_to problems_path, notice: "Problem was successfully created."
+			    else
+				    redirect_to @problem, notice: 'Problem was successfully created.'
+			    end
+		    else
+			    render :new
+		    end
+	    end
     end
   end
+
 
   def update
     if @problem.update(problem_params)
@@ -51,7 +72,6 @@ class ProblemsController < ApplicationController
 
 	    format.js do
 		    if @problem.update(resolved: true)
-					@problems = Problem.where(resolved: false).order('created_at DESC')
 			    render :resolve, status: :resolved
 		    end
 	    end

@@ -1,5 +1,4 @@
 <div class="row">
-
   <div class="small-10 small-offset-1 columns">
 
 	<% if !logged_in? %>
@@ -13,9 +12,9 @@
 
     <h3>Open Problems</h3>
 
-  </div>
-</div>
+    <div id="problems">
+      <%= render @problems %>
+    </div>
 
-<div id="problems">
-  <%= render @problems %>
+  </div>
 </div>

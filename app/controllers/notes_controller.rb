@@ -1,16 +1,9 @@
 class NotesController < ApplicationController
   before_action :authenticate
-  before_action :set_note, only: [:destroy, :update, :choose]
+  before_action :set_note, only: [:choose]
 
   def index
     @notes = Note.all
-  end
-
-  def new
-    @note = Note.new
-  end
-
-  def show
   end
 
   def create
@@ -32,21 +25,11 @@ class NotesController < ApplicationController
 		    if @note.save
 			    render :create, status: :created
 		    else
-					binding.pry
 			    render nothing: true, status: :bad_request
 		    end
 			end
     end
 
-  end
-
-  def destroy
-    if @note.destroy
-      redirect_to @note.problem
-    end
-  end
-
-  def update
   end
 
   def choose

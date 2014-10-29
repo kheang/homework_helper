@@ -1,19 +1,13 @@
-<div class="row">
+<div class="panel" id="<%= problem.persisted? ? dom_id(problem) : "problem-new" %>">
+  <p><%= link_to truncate(problem.issue, length: 140, omission: "...(continued)"), problem_path(problem) %></p>
+  <p>
+    Asked by <%= problem.user.name %> on
+    <%= l problem.created_at.in_time_zone('Eastern Time (US & Canada)'), format: :asked %>
+    | <%= pluralize(problem.note_count, 'note') %> posted
 
-  <div class="small-10 small-offset-1 columns">
-    <div class="panel">
-      <p><%= link_to truncate(problem.issue, length: 140, omission: "...(continued)"), problem_path(problem) %></p>
-      <p>
-        Asked by <%= problem.user.name %> on
-        <%= l problem.created_at.in_time_zone('Eastern Time (US & Canada)'), format: :asked %>
-        | <%= pluralize(problem.note_count, 'note') %> posted
+    <% if current_user == problem.user %>
+        | <%= link_to 'Mark as resolved <i class="fa fa-check-square"></i>'.html_safe, close_problem_path(problem), remote: true %>
+    <% end %>
 
-        <% if current_user == problem.user %>
-            | <%= link_to 'Mark as resolved <i class="fa fa-check-square"></i>'.html_safe, close_problem_path(problem), remote: true %>
-        <% end %>
-
-      </p>
-    </div>
-  </div>
-
+  </p>
 </div>
