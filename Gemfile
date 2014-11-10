@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.2'
+ruby '2.1.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
@@ -39,7 +39,6 @@ gem 'unicorn'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-
 gem 'simple_form'
 gem 'faker'
 gem 'rails_12factor', group: :production
@@ -57,5 +56,7 @@ group :development, :test do
 	gem "shoulda"
 	gem "email_spec"
 	gem "minitest-matchers_vaccine"
+	gem "rubocop", require: false
+	gem "rails_best_practices", require: false
+	gem "brakeman", require: false
 end
-
