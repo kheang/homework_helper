@@ -4,12 +4,12 @@ class ProblemsController < ApplicationController
 
   def index
     @problems = Problem.where(resolved: false).order('created_at DESC')
-		@problem = Problem.new
+    @problem = Problem.new
   end
 
   def show
-		@notes = @problem.notes
-		@note = Note.new
+    @notes = @problem.notes
+    @note = Note.new
   end
 
   def new
@@ -20,29 +20,29 @@ class ProblemsController < ApplicationController
     @problem = current_user.problems.build(problem_params)
 
     respond_to do |format|
-	    format.js do
-		    if @problem.save
-			    if request.referrer == problems_url
-				    render :create, status: :created
-			    else
-				    redirect_to @problem, notice: 'Problem was successfully created.'
-			    end
-		    else
-			    render :new
-		    end
-	    end
+      format.js do
+        if @problem.save
+          if request.referrer == problems_url
+            render :create, status: :created
+          else
+            redirect_to @problem, notice: 'Problem was successfully created.'
+          end
+        else
+          render :new
+        end
+      end
 
-	    format.html do
-		    if @problem.save
-			    if request.referrer == problems_url
-				    redirect_to problems_path, notice: "Problem was successfully created."
-			    else
-				    redirect_to @problem, notice: 'Problem was successfully created.'
-			    end
-		    else
-			    render :new
-		    end
-	    end
+      format.html do
+        if @problem.save
+          if request.referrer == problems_url
+            redirect_to problems_path, notice: 'Problem was successfully created.'
+          else
+            redirect_to @problem, notice: 'Problem was successfully created.'
+          end
+        else
+          render :new
+        end
+      end
     end
   end
 
@@ -64,18 +64,18 @@ class ProblemsController < ApplicationController
   def close
     respond_to do |format|
 
-			format.html do
-		    if @problem.update(resolved: true)
-	        redirect_to @problem, success: "Problem has been closed and removed from the open problems list."
-		    end
-			end
+      format.html do
+        if @problem.update(resolved: true)
+          redirect_to @problem, success: 'Problem has been closed and removed from the open problems list.'
+        end
+      end
 
-	    format.js do
-		    if @problem.update(resolved: true)
-			    render :resolve, status: :resolved
-		    end
-	    end
-	  end
+      format.js do
+        if @problem.update(resolved: true)
+          render :resolve
+        end
+      end
+    end
   end
 
   private

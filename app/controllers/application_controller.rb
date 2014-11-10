@@ -10,16 +10,15 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-	  @current_user ||= User.find_by(id: session[:current_user_id])
+    @current_user ||= User.find_by(id: session[:current_user_id])
   end
 
   def logged_in?
-	  !!current_user
+    !!current_user
   end
 
   def authenticate
-	  unless logged_in?
-		  redirect_to new_login_path, warning: "Please sign in."
-	  end
+    return if logged_in?
+    redirect_to new_login_path, warning: 'Please sign in.'
   end
 end

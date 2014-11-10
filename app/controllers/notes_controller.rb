@@ -13,21 +13,21 @@ class NotesController < ApplicationController
     @note.problem = @problem
 
     respond_to do |format|
-	    format.html do
-		    if @note.save
-			    redirect_to @problem, success: "Note created."
-		    else
-			    redirect_to @problem
-		    end
-	    end
+      format.html do
+        if @note.save
+          redirect_to @problem, success: 'Note created.'
+        else
+          redirect_to @problem
+        end
+      end
 
-	    format.js do
-		    if @note.save
-			    render :create, status: :created
-		    else
-			    render nothing: true, status: :bad_request
-		    end
-			end
+      format.js do
+        if @note.save
+          render :create, status: :created
+        else
+          render nothing: true, status: :bad_request
+        end
+      end
     end
 
   end
@@ -36,7 +36,7 @@ class NotesController < ApplicationController
     @problem = @note.problem
 
     if @note.update(chosen: true) && @problem.update(resolved: true)
-      redirect_to @problem, success: "Problem has been closed and removed from open problems list."
+      redirect_to @problem, success: 'Problem has been closed and removed from open problems list.'
     else
       redirect_to @problem
     end
@@ -49,7 +49,7 @@ class NotesController < ApplicationController
   end
 
   def set_note
-		@note = Note.find(params["id"])
+    @note = Note.find(params['id'])
   end
 
 end

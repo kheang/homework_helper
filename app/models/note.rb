@@ -1,6 +1,6 @@
 class Note < ActiveRecord::Base
   belongs_to :user
-	belongs_to :problem
+  belongs_to :problem
 
   after_create :send_email
 
@@ -14,7 +14,7 @@ class Note < ActiveRecord::Base
     return unless problem.present?
 
     if problem.resolved && self.chosen?
-      errors.add(:chosen, "cannot be chosen because there is already a chosen note for that problem")
+      errors.add(:chosen, 'cannot be chosen because there is already a chosen note for that problem')
     end
   end
 
