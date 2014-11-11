@@ -25,8 +25,8 @@ class NoteTest < ActiveSupport::TestCase
 
     should 'not send email if problem was created by same user' do
       new_note = Note.new(comment: notes(:one).comment,
-                           problem: problems(:one),
-                           user: notes(:two).user)
+                          problem: problems(:one),
+                          user: notes(:two).user)
 
       assert_equal new_note.user, new_note.problem.user, 'note and problem users should be the same'
 

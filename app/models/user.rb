@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates :email,
             presence: true,
             uniqueness: { case_sensitive: false },
-            format: { with: /\A[\w\-\.]+@[\w\-\.]+\Z/, message: 'must be a valid email address' }
+            format: { with: /\A[\w\-\.]+@[\w\-\.]+\Z/, message: 'must be valid email' }
 
   has_secure_password
 

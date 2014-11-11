@@ -1,42 +1,31 @@
 class NotesController < ApplicationController
   before_action :authenticate
   before_action :set_note, only: [:choose]
+  before_action :set_problem, only: [:create]
 
   def index
     @notes = Note.all
   end
 
   def create
-    @problem = Problem.find(params[:problem_id])
-    @notes = @problem.notes
     @note = current_user.notes.build(note_params)
-    @note.problem = @problem
 
     respond_to do |format|
-      format.html do
-        if @note.save
-          redirect_to @problem, success: 'Note created.'
-        else
-          redirect_to @problem
-        end
-      end
-
-      format.js do
-        if @note.save
-          render :create, status: :created
-        else
-          render nothing: true, status: :bad_request
-        end
+      if @note.save
+        format.html { redirect_to @problem, success: 'Note created.' }
+        format.js { render :create, status: :created }
+      else
+        format.html { redirect_to @problem }
+        format.js { render nothing: true, status: :bad_request }
       end
     end
-
   end
 
   def choose
     @problem = @note.problem
 
     if @note.update(chosen: true) && @problem.update(resolved: true)
-      redirect_to @problem, success: 'Problem has been closed and removed from open problems list.'
+      redirect_to @problem, success: 'Problem has been closed.'
     else
       redirect_to @problem
     end
@@ -45,11 +34,17 @@ class NotesController < ApplicationController
   private
 
   def note_params
-    params.require(:note).permit(:user, :comment, :chosen, :name)
+    note_params = params.require(:note).permit(:comment, :chosen)
+    note_params[:problem_id] = @problem[:id]
+    note_params
   end
 
   def set_note
     @note = Note.find(params['id'])
+  end
+
+  def set_problem
+    @problem = Problem.find(params[:problem_id])
   end
 
 end

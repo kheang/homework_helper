@@ -3,7 +3,7 @@ require 'test_helper'
 class ProblemsControllerTest < ActionController::TestCase
   def invalid_problem_attributes
     { problem: { issue: '',
-                  try: '' } }
+                 try: '' } }
   end
 
   def valid_problem_attributes
@@ -72,11 +72,11 @@ class ProblemsControllerTest < ActionController::TestCase
 
       should 'create a problem' do
         assert assigns[:problem], 'Should have a problem'
-        assert assigns[:problem].persisted?, 'Should have saved problem in the DB'
+        assert assigns[:problem].persisted?, 'Should save problem in DB'
       end
 
       should 'show problem' do
-        assert_redirected_to problem_path(assigns[:problem]), 'Should redirect to show problem'
+        assert_redirected_to assigns[:problem], 'Should redirect to show problem'
       end
     end
   end

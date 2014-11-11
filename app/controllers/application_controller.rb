@@ -14,11 +14,14 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in?
-    !!current_user
+    !!current_user && @current_user.try(:activated)
   end
 
   def authenticate
-    return if logged_in?
-    redirect_to new_login_path, warning: 'Please sign in.'
+    redirect_to new_login_path, warning: 'Please sign in.' unless logged_in?
+  end
+
+  def valid_key?
+    @user = User.find_by(activation_key: params[:activation_key])
   end
 end

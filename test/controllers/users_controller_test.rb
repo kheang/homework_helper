@@ -1,29 +1,19 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
-  include BCrypt
-
-  def password
-    @password ||= Password.new(password_hash)
-  end
-
-  def password=(new_password)
-    @password = Password.create(new_password)
-    self.password_hash = @password
-  end
 
   def valid_user_attributes
-    {name: Faker::Name.name,
-     email: Faker::Internet.email,
-     password: 'password',
-     password_confirmation: 'password'}
+    { name: Faker::Name.name,
+      email: Faker::Internet.email,
+      password: 'password',
+      password_confirmation: 'password' }
   end
 
   def invalid_user_attributes
-    {name: '',
-     email: '',
-     password: '',
-     password_confirmation: ''}
+    { name: '',
+      email: '',
+      password: '',
+      password_confirmation: '' }
   end
 
   test 'should get new' do
@@ -33,7 +23,7 @@ class UsersControllerTest < ActionController::TestCase
 
   context 'POST :create' do
     context 'when I send invalid information' do
-      setup { post :create, { user: invalid_user_attributes } }
+      setup { post :create, user: invalid_user_attributes }
 
       should 're-render the form' do
         assert_template :new
@@ -48,7 +38,7 @@ class UsersControllerTest < ActionController::TestCase
     context 'when I send valid information' do
       setup do
         @user = valid_user_attributes
-        post :create, { user: @user }
+        post :create, user: @user
       end
 
       should 'create a user' do
@@ -58,7 +48,7 @@ class UsersControllerTest < ActionController::TestCase
       end
 
       should 'send to login show prompt after creating user' do
-        assert_redirected_to login_show_path(assigns['user'].id), 'Should send to login show'
+        assert_redirected_to login_show_path(assigns['user'].id)
       end
     end
   end
@@ -67,7 +57,7 @@ class UsersControllerTest < ActionController::TestCase
     context 'when I verify with an invalid key' do
       setup do
         @user = users(:one)
-        patch :activate, { id: @user.id, activation_key: SecureRandom.uuid }
+        patch :activate, id: @user.id, activation_key: SecureRandom.uuid
       end
 
       should 'not verify the user' do
@@ -82,7 +72,7 @@ class UsersControllerTest < ActionController::TestCase
     context 'when I verify with a valid key' do
       setup do
         @user = users(:one)
-        patch :activate, { id: @user.id, activation_key: @user.activation_key }
+        patch :activate, id: @user.id, activation_key: @user.activation_key
       end
 
       should 'verify the user' do
@@ -90,7 +80,7 @@ class UsersControllerTest < ActionController::TestCase
       end
 
       should 'send user to login show page' do
-        assert_redirected_to login_show_path(@user), 'should send to login show page'
+        assert_redirected_to login_show_path(@user)
       end
     end
   end

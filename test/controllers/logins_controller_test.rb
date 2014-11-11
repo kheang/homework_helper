@@ -2,13 +2,13 @@ require 'test_helper'
 
 class LoginsControllerTest < ActionController::TestCase
   def valid_login_attributes
-    {email: users(:one).email,
-     password: 'password'}
+    { email: users(:one).email,
+      password: 'password' }
   end
 
   def invalid_login_attributes
-    {email: '',
-     password: ''}
+    { email: '',
+      password: '' }
   end
 
   context 'GET logins#new' do
@@ -23,7 +23,7 @@ class LoginsControllerTest < ActionController::TestCase
       setup { post :create, invalid_login_attributes }
 
       should 're-render the form' do
-        assert_template :new
+        assert_redirected_to new_login_path, 'should redirect to login page'
       end
     end
 
@@ -40,14 +40,6 @@ class LoginsControllerTest < ActionController::TestCase
 
         should 'redirect to homepage' do
           assert_redirected_to root_path
-        end
-      end
-
-      context 'if user is not activated' do
-        setup { post :create, valid_login_attributes }
-
-        should 'redirect to homepage' do
-          assert_template 'show', 'should show user page to suggest activation'
         end
       end
     end

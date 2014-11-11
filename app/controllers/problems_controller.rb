@@ -20,60 +20,33 @@ class ProblemsController < ApplicationController
     @problem = current_user.problems.build(problem_params)
 
     respond_to do |format|
-      format.js do
-        if @problem.save
-          if request.referrer == problems_url
-            render :create, status: :created
-          else
-            redirect_to @problem, notice: 'Problem was successfully created.'
-          end
-        else
-          render :new
-        end
-      end
-
-      format.html do
-        if @problem.save
-          if request.referrer == problems_url
-            redirect_to problems_path, notice: 'Problem was successfully created.'
-          else
-            redirect_to @problem, notice: 'Problem was successfully created.'
-          end
-        else
-          render :new
-        end
+      if @problem.save
+        format.html { redirect_to @problem, notice: 'Problem was created.' }
+        format.js { render :create, status: :created }
+      else
+        format.all { render :new }
       end
     end
   end
 
-
   def update
     if @problem.update(problem_params)
-      redirect_to @problem, notice: 'Problem was successfully updated.'
+      redirect_to @problem, notice: 'Problem was updated.'
     else
       render :edit
     end
   end
 
   def destroy
-    if @problem.destroy
-      redirect_to problems_url, notice: 'Problem was successfully destroyed.'
-    end
+    return unless @problem.destroy
+    redirect_to problems_url, notice: 'Problem was destroyed.'
   end
 
   def close
     respond_to do |format|
-
-      format.html do
-        if @problem.update(resolved: true)
-          redirect_to @problem, success: 'Problem has been closed and removed from the open problems list.'
-        end
-      end
-
-      format.js do
-        if @problem.update(resolved: true)
-          render :resolve
-        end
+      if @problem.update(resolved: true)
+        format.html { redirect_to @problem, success: 'Problem was closed.' }
+        format.js { render :resolve }
       end
     end
   end
@@ -87,5 +60,4 @@ class ProblemsController < ApplicationController
   def problem_params
     params.require(:problem).permit(:issue, :try)
   end
-
 end

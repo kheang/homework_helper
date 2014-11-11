@@ -11,23 +11,18 @@ class UsersController < ApplicationController
     else
       render :new
     end
-
   end
 
   def activate
     if valid_key?
       @user.update(activated: true)
-      redirect_to login_show_path(@user), success: 'User account successfully activated.'
+      redirect_to login_show_path(@user), success: 'User account was activated.'
     else
-      render :show, error: 'User activation failed. Please double check email or request new activation key.'
+      render :show, error: 'User activation failed. Please activate via email.'
     end
   end
 
   private
-
-  def valid_key?
-    @user = User.find_by(activation_key: params[:activation_key])
-  end
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)

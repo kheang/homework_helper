@@ -13,6 +13,6 @@ class Problem < ActiveRecord::Base
   end
 
   def send_email
-    UserMailer.new_problem(self.id).deliver
+    UserMailer.new_problem(id).deliver
   end
 end

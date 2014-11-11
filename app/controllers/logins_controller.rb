@@ -2,20 +2,19 @@ class LoginsController < ApplicationController
   def new
   end
 
+  def show
+    @user = User.find(params[:id])
+    redirect_to new_login_path unless valid_key?
+  end
+
   def create
     @user = User.find_by(email: params[:email])
 
     if @user && @user.authenticate(params[:password])
-      if @user.activated
-        session[:current_user_id] = @user.id
-        redirect_to root_path, success: 'You are successfully logged in.'
-      else
-        flash.now[:info] = 'You have not been logged in.'
-        render :show
-      end
+      session[:current_user_id] = @user.id
+      redirect_to root_path, success: 'You are successfully logged in.'
     else
-      flash.now[:alert] = 'Your email and password were invalid.'
-      render :new
+      redirect_to new_login_path, alert: 'Your email and password were invalid.'
     end
   end
 
@@ -24,7 +23,4 @@ class LoginsController < ApplicationController
     redirect_to root_path, success: 'You have been logged out.'
   end
 
-  def show
-    @user = User.find(params[:id])
-  end
 end

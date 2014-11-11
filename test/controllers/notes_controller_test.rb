@@ -13,7 +13,7 @@ class NotesControllerTest < ActionController::TestCase
     context 'when user is not logged in' do
       setup do
         @problem = problems(:one)
-        post :create, { problem_id: @problem.id }, { note: invalid_note_attributes }
+        post :create, { problem_id: @problem.id }, note: invalid_note_attributes
       end
 
       should 'redirect to new login' do
@@ -52,11 +52,8 @@ class NotesControllerTest < ActionController::TestCase
           assert_redirected_to problems(:one), 'Should redirect to show problem'
         end
       end
-
     end
   end
-
-
 
   context 'PATCH :update' do
     context 'when a problem creator chooses note' do
