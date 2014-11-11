@@ -18,6 +18,15 @@ class LoginsControllerTest < ActionController::TestCase
     should render_template(:new)
   end
 
+  context 'GET logins#show' do
+	  setup { get :show, id: users(:one) }
+
+	  should 'load user' do
+		  assert assigns[:user]
+	  end
+	  should render_template(:show)
+  end
+
   context 'POST logins#create' do
     context 'when I send invalid information' do
       setup { post :create, invalid_login_attributes }
@@ -60,5 +69,4 @@ class LoginsControllerTest < ActionController::TestCase
       end
     end
   end
-
 end

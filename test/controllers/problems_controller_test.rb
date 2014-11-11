@@ -34,11 +34,23 @@ class ProblemsControllerTest < ActionController::TestCase
   end
 
   context 'GET problems#new' do
-    setup { get :new }
+	  context 'if not logged in' do
+	    setup { get :new }
 
-    should 'redirect to login page' do
-      assert_redirected_to new_login_path
-    end
+	    should 'redirect to login page' do
+	      assert_redirected_to new_login_path
+	    end
+	  end
+
+	  context 'if logged in' do
+		  setup { get :new, {}, logged_in_session }
+
+		  should 'load problem' do
+			  assert assigns[:problem], 'should load new problem'
+		  end
+
+		  should render_template('new')
+	  end
   end
 
   context 'POST#create' do
@@ -80,4 +92,19 @@ class ProblemsControllerTest < ActionController::TestCase
       end
     end
   end
+
+	context 'PATCH problems#close' do
+		setup do
+			@problem = problems(:one)
+			patch :close, { id: @problem, resolved: true }, logged_in_session
+		end
+
+		should 'load problem' do
+			assert assigns[:problem], 'load problem'
+		end
+
+		should 'update problem to closed' do
+			assert @problem.reload.resolved, 'should be marked close'
+		end
+	end
 end

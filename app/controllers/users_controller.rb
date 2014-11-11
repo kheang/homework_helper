@@ -14,11 +14,12 @@ class UsersController < ApplicationController
   end
 
   def activate
-    if valid_key?
+		@user = User.find(params[:id])
+    if valid_key?(@user)
       @user.update(activated: true)
       redirect_to login_show_path(@user), success: 'User account was activated.'
     else
-      render :show, error: 'User activation failed. Please activate via email.'
+	    redirect_to login_show_path(@user), error: 'User activation failed. Please activate via email.'
     end
   end
 

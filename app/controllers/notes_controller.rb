@@ -3,10 +3,6 @@ class NotesController < ApplicationController
   before_action :set_note, only: [:choose]
   before_action :set_problem, only: [:create]
 
-  def index
-    @notes = Note.all
-  end
-
   def create
     @note = current_user.notes.build(note_params)
 
@@ -23,12 +19,9 @@ class NotesController < ApplicationController
 
   def choose
     @problem = @note.problem
-
-    if @note.update(chosen: true) && @problem.update(resolved: true)
-      redirect_to @problem, success: 'Problem has been closed.'
-    else
-      redirect_to @problem
-    end
+		msg = 'Problem has been closed'
+    flash[:success] = msg if @note.update(chosen: true) && @problem.update(resolved: true)
+    redirect_to @problem
   end
 
   private

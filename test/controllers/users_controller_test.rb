@@ -56,7 +56,7 @@ class UsersControllerTest < ActionController::TestCase
   context 'Verify' do
     context 'when I verify with an invalid key' do
       setup do
-        @user = users(:one)
+	      @user = users(:one)
         patch :activate, id: @user.id, activation_key: SecureRandom.uuid
       end
 
@@ -65,7 +65,7 @@ class UsersControllerTest < ActionController::TestCase
       end
 
       should 'send user back to show' do
-        assert_template :show, 'should send to show'
+	      assert_redirected_to login_show_path(@user)
       end
     end
 

@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     redirect_to new_login_path, warning: 'Please sign in.' unless logged_in?
   end
 
-  def valid_key?
-    @user = User.find_by(activation_key: params[:activation_key])
+  def valid_key?(user)
+    user = User.find_by(activation_key: params[:activation_key])
   end
 end

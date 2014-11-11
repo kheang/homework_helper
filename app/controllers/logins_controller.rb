@@ -3,8 +3,7 @@ class LoginsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    redirect_to new_login_path unless valid_key?
+	  @user = User.find(params[:id])
   end
 
   def create
@@ -22,5 +21,4 @@ class LoginsController < ApplicationController
     session[:current_user_id] = nil
     redirect_to root_path, success: 'You have been logged out.'
   end
-
 end

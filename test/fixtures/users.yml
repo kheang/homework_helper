@@ -7,6 +7,13 @@ one:
   activation_key: <%= SecureRandom.uuid %>
   activated: false
 
+one_activated:
+  name: User One Active
+  email: one.active@example.com
+  password_digest: <%= BCrypt::Password.create("password", cost: 10) %>
+  activation_key: <%= SecureRandom.uuid %>
+  activated: true
+
 two:
   name: User Two
   email: two@example.com

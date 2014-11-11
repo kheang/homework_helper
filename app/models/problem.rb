@@ -1,6 +1,6 @@
 class Problem < ActiveRecord::Base
   belongs_to :user
-  delegate :name, :to => :user, :prefix => true
+  delegate :name, to: :user, prefix: true
   has_many :notes
 
   validates :issue, presence: true

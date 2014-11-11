@@ -1,8 +1,8 @@
 class Note < ActiveRecord::Base
   belongs_to :user
-  delegate :name, :to => :user, :prefix => true
+  delegate :name, to: :user, prefix: true
   belongs_to :problem
-  delegate :resolved, :to => :problem, :prefix => true
+  delegate :resolved, to: :problem, prefix: true
 
   after_create :send_email
 

@@ -1,6 +1,6 @@
 class ProblemsController < ApplicationController
-  before_action :authenticate, only: [:new, :create, :destroy, :close, :update]
-  before_action :set_problem, only: [:show, :update, :destroy, :close]
+  before_action :authenticate, only: [:new, :create, :close]
+  before_action :set_problem, only: [:show, :close]
 
   def index
     @problems = Problem.where(resolved: false).order('created_at DESC')
@@ -29,25 +29,11 @@ class ProblemsController < ApplicationController
     end
   end
 
-  def update
-    if @problem.update(problem_params)
-      redirect_to @problem, notice: 'Problem was updated.'
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    return unless @problem.destroy
-    redirect_to problems_url, notice: 'Problem was destroyed.'
-  end
-
   def close
     respond_to do |format|
-      if @problem.update(resolved: true)
-        format.html { redirect_to @problem, success: 'Problem was closed.' }
-        format.js { render :resolve }
-      end
+      return unless @problem.update(resolved: true)
+      format.html { redirect_to @problem, success: 'Problem was closed.' }
+      format.js { render :resolve }
     end
   end
 
