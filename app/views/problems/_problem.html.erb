@@ -1,7 +1,7 @@
 <div class="panel" id="<%= problem.persisted? ? dom_id(problem) : "problem-new" %>">
   <p><%= link_to truncate(problem.issue, length: 140, omission: "...(continued)"), problem_path(problem) %></p>
   <p>
-    Asked by <%= problem.user.name %> on
+    Asked by <%= problem.user_name %> on
     <%= l problem.created_at.in_time_zone('Eastern Time (US & Canada)'), format: :asked %>
     | <%= pluralize(problem.note_count, 'note') %> posted
 

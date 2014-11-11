@@ -3,15 +3,15 @@
       <%= note.comment %>
     </p>
     <p>
-      Posted by <%= note.user.name %>
-      <% unless note.problem.resolved %>
-          <% if current_user == note.problem.user && current_user != note.user %>
-              | <%= link_to 'Mark as resolution <i class="fa fa-check-square"></i>'.html_safe, choose_note_path(note) %>
-          <% end %>
+      Posted by <%= note.user_name %>
+      <% if note.problem_resolved %>
+        <% if note.chosen %>
+          | <strong>Resolved Problem</strong>
+        <% end %>
       <% else %>
-          <% if note.chosen %>
-              | <strong>Resolved Problem</strong>
-          <% end %>
+        <% if current_user == note.problem.user && current_user != note.user %>
+            | <%= link_to 'Mark as resolution <i class="fa fa-check-square"></i>'.html_safe, choose_note_path(note) %>
+        <% end %>
       <% end %>
     </p>
 </div>

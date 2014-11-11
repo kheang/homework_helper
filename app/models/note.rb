@@ -1,6 +1,8 @@
 class Note < ActiveRecord::Base
   belongs_to :user
+  delegate :name, :to => :user, :prefix => true
   belongs_to :problem
+  delegate :resolved, :to => :problem, :prefix => true
 
   after_create :send_email
 
@@ -19,3 +21,5 @@ class Note < ActiveRecord::Base
     UserMailer.new_note(id).deliver if user != problem.user
   end
 end
+
+
