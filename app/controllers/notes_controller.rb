@@ -46,5 +46,4 @@ class NotesController < ApplicationController
   def set_problem
     @problem = Problem.find(params[:problem_id])
   end
-
 end
