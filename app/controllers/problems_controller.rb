@@ -44,6 +44,6 @@ class ProblemsController < ApplicationController
   end
 
   def problem_params
-    params.require(:problem).permit(:issue, :try)
+    params.require(:problem).permit(:issue, :try, :screen)
   end
 end

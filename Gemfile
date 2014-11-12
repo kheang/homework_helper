@@ -42,8 +42,9 @@ gem 'unicorn'
 gem 'simple_form'
 gem 'faker'
 gem 'rails_12factor', group: :production
-
 gem 'simplecov', :require => false, :group => :test
+gem 'paperclip', '~> 4.2'
+gem 'remotipart', '~> 1.2'
 
 # Assets
 gem 'foundation-rails'

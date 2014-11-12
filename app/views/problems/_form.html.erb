@@ -1,9 +1,9 @@
-<%= simple_form_for [problem], remote: true do |form| %>
-    My problem:
-    <%= form.input :issue, :label => false %>
-    What I tried:
-    <%= form.input :try, :label => false %>
-
-    <%= form.button :submit, 'Add Problem', class: "btn btn-large btn-success" %>
-
+<%= simple_form_for [problem], :html => { :multipart => true }, :remote => true do |form| %>
+  My problem:
+  <%= form.input :issue, :label => false %>
+  What I tried:
+  <%= form.input :try, :label => false %>
+  Optional screenshot (valid filetypes: png, jpeg, gif)
+  <%= form.file_field :screen %>
+  <%= form.button :submit, 'Add Problem', class: "btn btn-large btn-success" %>
 <% end %>

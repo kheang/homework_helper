@@ -10,6 +10,12 @@
       <%= @problem.try %>
     </p>
 
+    <% if @problem.screen %>
+      <p><strong>Screenshot:</strong>
+        <%= image_tag @problem.screen.url(:medium) %>
+      </p>
+    <% end %>
+
     <p>
         <% if @problem.resolved == false %>
           <% if current_user == @problem.user %>

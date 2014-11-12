@@ -39,4 +39,9 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
 
   config.action_mailer.default_url_options = { host: 'localhost:3000'}
+
+  # Let PaperClip know where to look for ImageMagick utility
+  Paperclip.options[:command_path] = '/usr/local/bin/'
+
+  config.serve_static_assets = true
 end
